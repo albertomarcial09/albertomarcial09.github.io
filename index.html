@@ -1,49 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Professional Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jujutsu Kaisen Animated Experience</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
-        /* This is the CSS */
+        /* =========================================
+           CSS VARIABLES & RESET
+           ========================================= */
+        :root {
+            --jjk-red: #bc1e22;    /* Domain Expansion/Cursed Energy Red */
+            --jjk-blue: #001a35;   /* Gojo Blue/Dark Navy */
+            --jjk-black: #0a0a0a;  /* Deep Black */
+            --jjk-purple: #2d004d; /* Hollow Purple */
+            
+            /* JJK Fonts */
+            --font-main: 'Anton', sans-serif;
+            --font-japanese: 'Sawarabi Gothic', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            background-color: var(--jjk-black);
+            color: #fff;
+            font-family: Arial, sans-serif; /* Fallback */
+            overflow-x: hidden; /* Crucial for entry animations */
+        }
+
+        /* =========================================
+           SECTION STYLING (The Core Container)
+           ========================================= */
+        .jjk-section {
+            width: 100%;
+            height: 100vh; /* Full Viewport Height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* The animated content wrapper inside each section */
+        .section-content {
+            text-align: center;
+            z-content: 10;
             max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: #f4f4f9;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Text readability overlay */
+            border-radius: 10px;
+            
+            /* HIDE CONTENT BY DEFAULT FOR JS TO REVEAL */
+            opacity: 0; 
+            transform: translateY(50px);
+            transition: all 1s ease-out; /* Fallback entry transition */
         }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+
+        /* Simple class to reveal the content (fallback if Animate.css fails) */
+        .section-content.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        /* =========================================
+           TYPOGRAPHY & JJK STYLING
+           ========================================= */
+        .section-content h1 {
+            font-family: var(--font-main);
+            font-size: 5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            color: var(--jjk-red);
+            text-shadow: 0 0 15px var(--jjk-red);
         }
-        .btn {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
+
+        .section-content h2 {
+            font-family: var(--font-japanese);
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
         }
-        .btn:hover {
-            background: #2980b9;
+
+        .section-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
         }
+
+        /* Special Styling for specific animations */
+        .glitch-text {
+            animation: glitch 1s linear infinite;
+        }
+
+        /* =========================================
+           CUSTOM KEYFRAME ANIMATIONS (CSS)
+           ========================================= */
+        
+        /* 1. Glitch Effect (Sukuna/Cursed Energy) */
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        
+        /* 2. Slow Pulse (Gojo/Infinity) */
+        @keyframes slowPulse {
+            0% { transform: scale(1); opacity: 1; text-shadow: 0 0 5px #fff; }
+            50% { transform: scale(1.05); opacity: 0.8; text-shadow: 0 0 20px var(--jjk-blue); }
+            100% { transform: scale(1); opacity: 1; text-shadow: 0 0 5px #fff; }
+        }
+
+        /* =========================================
+           SECTION-SPECIFIC BACKGROUNDS & ID's
+           Replace 'images/bgX.jpg' with your assets
+           ========================================= */
+        #section1 { background-image: url('images/bg1.jpg'); background-color: #1a0000; } /* Itadori/Sukuna Start */
+        #section2 { background-image: url('images/bg2.jpg'); background-color: #000a1a; } /* Megumi/Shadows */
+        #section3 { background-image: url('images/bg3.jpg'); background-color: #1a001a; } /* Nobara/Resonance */
+        #section4 { background-image: url('images/bg4.jpg'); background-color: #000;   }   /* Gojo/Infinity */
+        #section5 { background-image: url('images/bg5.jpg'); background-color: #1a1a00; } /* Nanami/Ratio */
+        #section6 { background-image: url('images/bg6.jpg'); background-color: #001a00; } /* Maki/Cursed Tools */
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to My Project</h1>
-        <p>I am a student currently studying Database Management and Cloud Computing.</p>
-        <p>This site is hosted directly on GitHub Pages!</p>
-        <a href="https://github.com/your-username" class="btn">View My GitHub</a>
-    </div>
+
+    <section id="section1" class="jjk-section">
+        <div class="section-content js-animate" data-animation="animate__flash">
+            <h1 class="glitch-text">Start</h1>
+            <h2>宿儺 (Sukuna)</h2>
+            <p>"Know your place, fool." The animated experience begins. This section flashes aggressively upon entry.</p>
+        </div>
+    </section>
+
+    <section id="section2" class="jjk-section">
+        <div class="section-content js-animate" data-animation="animate__zoomInDown">
+            <h1 style="color: #fff; text-shadow: 0 0 10px #fff;">Shadows</h1>
+            <h2>伏黒 恵 (Megumi)</h2>
+            <p>From the shadows, they emerge. This content zooms in dramatically from above.</p>
+        </div>
+    </section>
+
+    <section id="section3" class="jjk-section">
+        <div class="section-content js-animate" data-animation="animate__rubberBand">
+            <h1 style="color: #ffcccc; text-shadow: 0 0 10px #ffcccc;">Nails</h1>
+            <h2>釘崎 野薔薇 (Nobara)
+            <p>Resonance! This section content stretches and snaps into place like a rubber band.</p>
+        </div>
+    </section>
+
+    <section id="section4" class="jjk-section">
+        <div class="section-content custom-animate" id="gojo-content">
+            <h1 style="color: var(--jjk-blue); text-shadow: 0 0 15px var(--jjk-blue);">Infinity</h1>
+            <h2>五条 悟 (Gojo)</h2>
+            <p>Welcome to the Void. This section content uses a custom, slow pulsing animation.</p>
+        </div>
+    </section>
+
+    <section id="section5" class="jjk-section">
+        <div class="section-content js-animate" data-animation="animate__tada">
+            <h1 style="color: #ffeb3b; text-shadow: 0 0 10px #ffeb3b;">Ratio</h1>
+            <h2>七海 建人 (Nanami)</h2>
+            <p>The time is 7:3. This section content makes a quick 'Tada!' entrance animation.</p>
+        </div>
+    </section>
+
+    <section id="section6" class="jjk-section">
+        <div class="section-content js-animate" data-animation="animate__backInRight">
+            <h1 style="color: #fff; text-shadow: 0 0 10px var(--jjk-black);">Tools</h1>
+            <h2>禪院 真希 (Maki)</h2>
+            <p>Master of arms. This final section slides in sharply from the right.</p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. SET UP THE OBSERVER ---
+            // Intersection Observer detects when elements enter the screen
+            const observerOptions = {
+                root: null, // use the viewport
+                threshold: 0.3 // trigger when 30% of the element is visible
+            };
+
+            const animationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    
+                    // IF THE ELEMENT IS VISIBLE
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+
+                        // -- Handle Animate.css Animations (Sections 1, 2, 3, 5, 6) --
+                        if (target.classList.contains('js-animate')) {
+                            // Read the custom animation class from 'data-animation' attribute
+                            const animationClass = target.getAttribute('data-animation');
+                            
+                            // Add the Animate.css required classes
+                            target.classList.add('animate__animated', animationClass);
+                            
+                            // Ensure the content becomes visible
+                            target.style.opacity = '1';
+                        }
+
+                        // -- Handle Custom CSS Animations (Section 4 - Gojo) --
+                        if (target.id === 'gojo-content') {
+                            // Apply the custom keyframe animation defined in the CSS variables
+                            target.style.animation = 'slowPulse 4s ease-in-out infinite';
+                            target.style.opacity = '1'; // Reveal
+                        }
+
+                        // Optional: Stop observing after it has animated once
+                        // observer.unobserve(target);
+                    }
+                });
+            }, observerOptions);
+
+            // --- 2. SELECT ELEMENTS TO OBSERVE ---
+            // Find all content blocks that need Animate.css
+            const animatedContentBlocks = document.querySelectorAll('.js-animate');
+            animatedContentBlocks.forEach(block => animationObserver.observe(block));
+
+            // Find the custom Gojo animation block
+            const gojoBlock = document.getElementById('gojo-content');
+            if (gojoBlock) {
+                animationObserver.observe(gojoBlock);
+            }
+
+        });
+    </script>
 </body>
 </html>
